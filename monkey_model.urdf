@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<robot name="double_pendulum">
+
+<link name="bar1">
+<inertial>
+<mass value="0"/>
+<!-- <inertia ixx="0.2125" ixy="-0.005" ixz="0.0225" iyy="0.205" iyz="0.045" izz="0.0125"/> -->
+<inertia ixx="0.021041666666666667" ixy="0.0" ixz="0.0" iyy="0.021041666666666667" iyz="0.0" izz="0.00041666666666666675" />
+<origin rpy="0 0 0" xyz="0 0 0"/>
+</inertial>
+<visual>
+<origin xyz = "0 0 0" />
+<geometry>
+<box size ="0.1 0.1 0.1" />
+</geometry>
+<material name = "gray A">
+<color rgba = "0.1 0.1 0.1 1" />
+</material>
+</visual>
+</link>
+
+<link name="armLR">
+<inertial>
+<mass value="1"/>
+<!-- <inertia ixx="0.2125" ixy="-0.005" ixz="0.0225" iyy="0.205" iyz="0.045" izz="0.0125"/> -->
+<inertia ixx="0.021041666666666667" ixy="0.0" ixz="0.0" iyy="0.021041666666666667" iyz="0.0" izz="0.00041666666666666675" />
+<origin xyz="0 0.1 -0.2" rpy="0 0 0"/>
+</inertial>
+<visual>
+<origin xyz="0 0.1 -0.2" rpy="0 0 0"/>
+<geometry>
+<box size ="0.05 0.05 0.5" />
+</geometry>
+<material name = "gray B">
+<color rgba = "0.3 0.3 0.3 1" />
+</material>
+</visual>
+<collision>
+<origin xyz="0 0.1 -0.2" rpy="0 0 0"/>
+<geometry>
+<box size ="0.05 0.05 0.5" />
+</geometry>
+</collision>
+</link>
+
+<link name="armUR">
+<inertial>
+<mass value="1"/>
+<!-- <inertia ixx="0.2125" ixy="-0.005" ixz="0.0225" iyy="0.205" iyz="0.045" izz="0.0125"/> -->
+<inertia ixx="0.021041666666666667" ixy="0.0" ixz="0.0" iyy="0.021041666666666667" iyz="0.0" izz="0.00041666666666666675" />
+<origin xyz="0 0.1 -0.375" rpy="0 0 0"/>
+</inertial>
+<visual>
+<origin xyz="0 0.1 -0.25" rpy="0 0 0"/>
+<geometry>
+<box size ="0.05 0.05 0.5" />
+</geometry>
+<material name = "gray C">
+<color rgba = "0.5 0.5 0.5 1" />
+</material>
+</visual>
+<collision>
+<origin xyz="0 0.1 -0.25" rpy="0 0 0"/>
+<geometry>
+<box size ="0.05 0.05 0.5" />
+</geometry>
+</collision>
+</link>
+
+
+<joint name="shoulder" type="continuous">
+<origin rpy="0 0 0" xyz="0 -0.1 -0.1"/>
+<parent link="bar1"/>
+<child link="armLR"/>
+<axis xyz="0.0 1.0 0.0"/>
+</joint>
+
+
+<joint name="elbow" type="continuous">
+<origin rpy="0 0 0" xyz="0 0 -0.45"/>
+<parent link="armLR"/>
+<child link="armUR"/>
+<axis xyz="0.0 1.0 0.0"/>
+</joint>
+
+</robot>
